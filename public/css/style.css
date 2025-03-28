@@ -1,0 +1,80 @@
+* {box-sizing: border-box;}
+.black-bg { background-color: black;}
+.gray-bg { background-color: #ececec; }
+
+
+
+html , body {height: 100vh; overflow-x: hidden; cursor: none;}
+.h100 {height: 100% !important;}
+.my-container { width: 100%; height: 100vh; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+
+header {height: 140px;}
+main {height: calc(100vh - 280px);}
+footer {height: 140px;}
+
+header, footer {background-color: #842929;}
+.logo { position: absolute; left: 10px; top: 30px; width: 200px; }
+h1 {text-align: center; color: white; font-size: 5rem;}
+h2 {text-align: center; padding-top: 5px; margin-bottom: 0px;}
+.box-popis {background-color: #E7E7E7; width: 100%;}
+.box-popis p {text-align: center; color: #000; font-size: 3rem; padding-bottom: 0px; margin-bottom: 0px;}
+.blue h2 {color: #0000ff; font-weight: bold; font-size: 4rem;}
+.blue .color-hint {height: 30px; background-color: #0033CC;}
+.green .color-hint {height: 30px; background-color: #006600;}
+.yellow .color-hint {height: 30px; background-color: #CCCC00;}
+.orange .color-hint {height: 30px; background-color: #FF6600;}
+.red .color-hint {height: 30px; background-color: #CC0000;}
+.green h2 {color: #007f00; font-weight: bold; font-size: 4rem;}
+.yellow h2 {color: #E5B200; font-weight: bold; font-size: 4rem;}
+.orange h2 {color: #CB6500; font-weight: bold; font-size: 4rem;}
+.red h2 {color: #CB0000; font-weight: bold; font-size: 4rem;}
+.col-triaz {width: 20% !important;}
+.col-triaz ul { list-style: none; padding: 5px;}
+.col-triaz ul li {border-bottom: 1px dotted #ddd; padding-bottom: 10px;}
+.col-triaz ul li:last-child {border-bottom: none;}
+.ticket {color: #b81010; letter-spacing: 0px; text-align:center; font-weight: bold; font-size: 14rem; line-height: 250px;}
+.ticket-time {color: #fff; font-size: 40px;}
+.number-remaining-tickets {color: #fff; font-size: 50px; margin-top: 20px;}
+
+.bottom-box {
+    align-items: center;
+    position: relative;
+    height: 100%;
+    overflow: hidden; /* Skryje obsah, ktorý sa posúva mimo */
+    background-color: #842929;
+}
+.time {
+    min-width: 400px;
+    background-color: #0476D0;
+    color: #fff;
+    font-weight: bold;
+    font-size: 5rem;
+    align-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+.text-container {width: 100%;}
+.text-message { color: #fff; font-size: 4rem; padding-left: 20px;}
+
+.call-layoyt { margin: 0 auto; width: 100%; }
+.call-layoyt table {padding-top: 25%; height: 100%; }
+.callTicketText {color: green; font-weight: bold; font-size: 25rem; }
+.callText { color: #fff; font-size: 8rem; }
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.hidden {
+    transform: translateX(100%);
+}
+
+.visible {
+    transform: translateX(0%);
+}
+
+

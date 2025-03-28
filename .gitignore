@@ -1,0 +1,7 @@
+.idea
+cert_dev
+cert
+package-lock.json
+config.json
+config_dev.json
+node_modules/

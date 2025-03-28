@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <style>
+        header {
+            height: 50px;
+        }
+        footer {
+            height: 30px;
+            background-color: #ddd;
+            text-align: center;
+            font-size: 13px;
+        }
+        main {
+            height: calc(100vh - 80px);
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Vyvolávaci systém</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+            <form action="/logout" method="post">
+                <button type="submit" class="btn btn-sm btn-light me-2">Odhlásiť</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <%- include('_leftNavigation.ejs'); -%>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
+                <h1 style="color: #555;">Nastavenie</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                </div>
+            </div>
+            <h2><%= section %></h2>
+            <div id="AlerMessage" class="mb-3"></div>
+
+
+            <div class="card" style="max-width: 500px; margin: 0 auto;">
+                <div class="card-header">
+                    <b>Nastavenie správy - spodná lišta</b>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form id='form' action="/setmessage" method="post">
+
+                            <label for="cTel">TV</label>
+                            <select id="cTel" class="form-select" onchange="setMessage();">
+                                <% select.forEach(item => { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                                <% }); %>
+                            </select>
+                            <label for="exampleFormControlTextarea1" class="mt-4">Text</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="10" name="message"></textarea>
+                            <input type="submit" class="btn btn-md btn-success mt-2" name="save" value="Nastaviť">
+                            <input id="token" name="token" type="text" hidden value="<%= token %>">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="pt-1">
+            version 1.0 created 2025 ©Ing. Pavol Jurák
+        </footer>
+
+    </div>
+</div>
+
+<script>
+    var data = <%- JSON.stringify(amb) %>;
+
+    function setMessage() {
+        $('#AlerMessage').html('');
+        let kk = $('#cTel').val();
+        let newText = data[kk].message;
+        $('#form textarea').val(newText);
+    }
+
+$(document).ready(function () {
+
+    setMessage();
+
+    $('#form').on('submit', function (e) {
+       e.preventDefault();
+       let dataForm = {
+           message: $('#form textarea').val(),
+           token: $('#token').val()
+       }
+       let kk = $('#cTel').val();
+
+        $.ajax({
+            type: 'post',
+            dataType: "json",
+            url: `/setmessage/${kk}/`,
+            data: dataForm,
+            success: function (request, status) {
+                if (request.status == "success") {
+                    $('#AlerMessage').html('<div class="alert alert-success">Správa bola úspešne nastavena.</div>');
+                    data[kk].message = dataForm.message;
+                }
+                if (request.status == "warning" || request.status == "error") {
+                    $('#AlerMessage').html('<div class="alert alert-danger">'+request.message+'</div>');
+                }
+           },
+           error: function (request, status) {
+                $('#AlerMessage').html('<div class="alert alert-danger">Nastala neočakavaná chyba.</div>');
+           }
+        });
+
+    });
+});
+</script>
+</body>
+</html>

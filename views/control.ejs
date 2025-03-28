@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vyvolávací systém</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+            <div class="card" style="max-width: 500px; margin: 0 auto;">
+                <div class="card-header">
+                    NASTAVENIE SPRÁVY NA SPODOK OBRAZOVKY
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form id='form'>
+                            <label for="exampleFormControlTextarea1">Správa</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" name="message"><%= message %></textarea>
+                            <input type="submit" class="btn btn-sm btn-success mt-2" name="save" value="Nastaviť">
+                            <input id="token" type="text" hidden value="<%= token %>">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('#form').on('submit', function (e) {
+           e.preventDefault();
+           let data = {
+               message: $('#form textarea').val(),
+               token: $('#token').val()
+           }
+
+            $.ajax({
+                type: 'post',
+                dataType: "json",
+                url: '/setmessage',
+                data: data,
+                success: function (response) {
+                    if (response.status == "success") {
+                        alert('Správa bola nastavena.')
+                    } else {
+                        alert('NASTALA CHYBA.');
+                    }
+              }
+            });
+
+        });
+
+    });
+</script>
+
+
+</body>
+</html>
