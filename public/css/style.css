@@ -32,7 +32,7 @@ h2 {text-align: center; padding-top: 5px; margin-bottom: 0px;}
 .col-triaz ul { list-style: none; padding: 5px;}
 .col-triaz ul li {border-bottom: 1px dotted #ddd; padding-bottom: 10px;}
 .col-triaz ul li:last-child {border-bottom: none;}
-.ticket {color: #b81010; letter-spacing: 0px; text-align:center; font-weight: bold; font-size: 14rem; line-height: 250px;}
+.ticket {color: #b81010; letter-spacing: 0px; text-align:center; font-weight: bold; font-size: 16rem; line-height: 250px;}
 .ticket-time {color: #fff; font-size: 40px;}
 .number-remaining-tickets {color: #fff; font-size: 50px; margin-top: 20px;}
 
